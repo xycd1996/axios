@@ -1,4 +1,4 @@
-const Axios = require('../src/index.ts')
+import Axios from '../src/index'
 
 describe('测试axios', () => {
   test('请求post', (done) => {
