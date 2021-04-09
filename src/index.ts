@@ -24,6 +24,13 @@ const Axios = axios.create({
       return cData
     }
     return omit(data, ['bodyType'])
+  },
+  transformResponse: (response) => {
+    return {
+      msg: response.msg,
+      data: response?.data,
+      code: response?.code
+    }
   }
 })
 

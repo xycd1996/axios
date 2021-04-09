@@ -1,5 +1,5 @@
-import { AxiosResponse } from 'axios'
-import { HTTP_CODE } from './../constants/index'
+import { AxiosResponse } from 'axios';
+import { HTTP_CODE } from './../constants/index';
 
 export const responseSuccess = (response: AxiosResponse, defaultConfig?: any) => {
   if (response?.data?.code !== '200') {
