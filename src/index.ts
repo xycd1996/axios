@@ -24,18 +24,21 @@ const Axios = axios.create({
       return cData
     }
     return omit(data, ['bodyType'])
-  },
+  }
 })
 
 Axios.interceptors.request.use(requestSuccess, requestFail)
-Axios.interceptors.response.use(responseSuccess, responseFail)
+Axios.interceptors.response.use(
+  (response) => responseSuccess(response, defaultConfig),
+  (fail) => responseFail(fail, defaultConfig)
+)
 
 const retAxios = {
   get: (url: string) => (params?: any) => {
     return Axios({
       method: 'GET',
       url,
-      params,
+      params
     })
       .then((res) => Promise.resolve(res.data))
       .catch((err) => Promise.reject(err))
@@ -44,7 +47,7 @@ const retAxios = {
     return Axios({
       method: 'POST',
       url,
-      data: Object.assign({}, data, { bodyType: options?.bodyType }),
+      data: Object.assign({}, data, { bodyType: options?.bodyType })
     })
       .then((res) => Promise.resolve(res.data))
       .catch((err) => Promise.reject(err))
@@ -53,7 +56,7 @@ const retAxios = {
     return Axios({
       method: 'PUT',
       url,
-      data,
+      data
     })
       .then((res) => Promise.resolve(res.data))
       .catch((err) => Promise.reject(err))
@@ -62,7 +65,7 @@ const retAxios = {
     return Axios({
       method: 'DELETE',
       url,
-      params,
+      params
     })
       .then((res) => Promise.resolve(res.data))
       .catch((err) => Promise.reject(err))
@@ -71,11 +74,11 @@ const retAxios = {
     return Axios({
       method: 'PATCH',
       url,
-      data,
+      data
     })
       .then((res) => Promise.resolve(res.data))
       .catch((err) => Promise.reject(err))
-  },
+  }
 }
 
 export const configure = (config) => {

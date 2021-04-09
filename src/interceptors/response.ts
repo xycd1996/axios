@@ -1,15 +1,18 @@
 import { AxiosResponse } from 'axios'
 import { HTTP_CODE } from './../constants/index'
 
-export const responseSuccess = (response: AxiosResponse) => {
+export const responseSuccess = (response: AxiosResponse, defaultConfig?: any) => {
+  if (response?.data?.code !== '200') {
+    defaultConfig.onError && defaultConfig.onError(response?.data)
+  }
   return response
 }
 
-export const responseFail = (error: any) => {
+export const responseFail = (error: any, defaultConfig?: any) => {
   if (error && error.response) {
-    console.error(HTTP_CODE[status])
+    defaultConfig.onError && defaultConfig.onError(HTTP_CODE[status])
   } else {
-    console.error('服务器无响应')
+    defaultConfig.onError && defaultConfig.onError('服务器无响应')
   }
   return error
 }

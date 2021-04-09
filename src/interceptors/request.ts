@@ -1,4 +1,4 @@
-import { AxiosRequestConfig } from 'axios'
+import { AxiosRequestConfig } from 'axios';
 
 export const requestSuccess = (config: AxiosRequestConfig) => {
   return config
