@@ -4,6 +4,7 @@ import { HTTP_CODE } from './../constants/index'
 export const responseSuccess = (response: AxiosResponse, defaultConfig?: any) => {
   if (response?.data?.code !== '200') {
     defaultConfig.onError && defaultConfig.onError(response?.data)
+    return Promise.reject(response)
   }
   return response
 }
