@@ -29,7 +29,8 @@ const Axios = axios.create({
     return {
       msg: response.msg,
       data: response?.data,
-      code: response?.code
+      code: response?.code,
+      ...omit(response, ['msg', 'data', 'code'])
     }
   }
 })
